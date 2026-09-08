@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Agrofeed Global — Commercial Investment & Management. Building an integrated African agricultural ecosystem from farm to market." />
+  <title>Agrofeed Global | Commercial Investment & Management</title>
+  <style>
+    :root{
+      --green:#0b7a47;
+      --green-2:#14905a;
+      --navy:#0d355f;
+      --deep:#0d355f;
+      --gold:#bf9740;
+      --cream:#f8f5ed;
+      --sand:#bf9740;
+      --white:#ffffff;
+      --ink:#102b43;
+      --muted:#63707a;
+      --line:rgba(13,53,95,.13);
+      --shadow:0 20px 60px rgba(13,53,95,.14);
+      --radius:24px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#fff;color:var(--ink);line-height:1.55;overflow-x:hidden}
+    a{text-decoration:none;color:inherit}
+    button,input,textarea,select{font:inherit}
+    img{max-width:100%;display:block}
+    .container{width:min(1160px,calc(100% - 40px));margin:auto}
+
+    /* Header */
+    .site-header{position:fixed;inset:0 0 auto 0;z-index:60;transition:.3s ease;border-bottom:1px solid transparent}
+    .site-header.scrolled{background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-color:var(--line);box-shadow:0 8px 30px rgba(14,39,28,.06)}
+    .nav{height:82px;display:flex;align-items:center;justify-content:space-between;gap:28px}
+    .brand{display:flex;align-items:center;min-width:max-content}
+    .brand-logo-wrap{display:flex;align-items:center;background:rgba(255,255,255,.94);border:1px solid rgba(255,255,255,.42);border-radius:14px;padding:7px 11px;box-shadow:0 10px 28px rgba(5,22,39,.14);backdrop-filter:blur(10px);transition:.3s ease}
+    .brand-logo{height:54px;width:auto;max-width:250px;object-fit:contain}
+    .scrolled .brand-logo-wrap{background:#fff;border-color:var(--line);box-shadow:0 8px 22px rgba(13,53,95,.08)}
+    .footer-logo-wrap{display:inline-flex;align-items:center;background:#fff;border-radius:14px;padding:9px 13px}
+    .footer-logo{height:72px;width:auto;max-width:320px;object-fit:contain}
+    .nav-links{display:flex;align-items:center;gap:24px;color:#fff;font-size:14px;font-weight:650}
+    .scrolled .nav-links{color:var(--deep)}
+    .nav-links a{position:relative;opacity:.92}
+    .nav-links a:after{content:"";position:absolute;left:0;right:100%;bottom:-6px;height:2px;background:var(--gold);transition:.25s}
+    .nav-links a:hover:after,.nav-links a.active:after{right:0}
+    .nav-cta{padding:12px 18px;border-radius:999px;background:#fff;color:var(--deep);font-weight:800}
+    .scrolled .nav-cta{background:var(--navy);color:#fff}
+    .menu-btn{display:none;border:0;background:transparent;width:44px;height:44px;border-radius:12px;color:#fff;align-items:center;justify-content:center;font-size:25px;cursor:pointer}
+    .scrolled .menu-btn{color:var(--deep)}
+
+    /* Hero */
+    .hero{height:min(900px,100vh);min-height:720px;position:relative;background:var(--navy);overflow:hidden}
+    .slides{position:absolute;inset:0}
+    .slide{position:absolute;inset:0;opacity:0;transform:scale(1.025);transition:opacity .8s ease, transform 5.8s ease;background-size:cover;background-position:center}
+    .slide.active{opacity:1;transform:scale(1)}
+    .slide:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,24,16,.86) 0%,rgba(6,24,16,.58) 48%,rgba(6,24,16,.22) 75%,rgba(6,24,16,.35) 100%),linear-gradient(0deg,rgba(6,24,16,.55),transparent 45%)}
+    .hero-content{height:100%;display:flex;align-items:center;position:relative;z-index:3;padding-top:80px}
+    .hero-copy{max-width:760px;color:#fff}
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:800}
+    .eyebrow:before{content:"";width:28px;height:2px;background:var(--gold)}
+    h1{font-size:clamp(48px,7vw,86px);line-height:.95;letter-spacing:-.055em;margin:22px 0 24px;max-width:900px}
+    .hero-copy p{font-size:clamp(17px,2vw,21px);max-width:680px;color:rgba(255,255,255,.84);margin:0 0 32px}
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 22px;border-radius:999px;font-weight:800;border:1px solid transparent;transition:.25s;cursor:pointer}
+    .btn-primary{background:var(--gold);color:#fff}
+    .btn-primary:hover{transform:translateY(-2px);background:#a77f2f}
+    .btn-ghost{border-color:rgba(255,255,255,.45);color:#fff;background:rgba(255,255,255,.06);backdrop-filter:blur(8px)}
+    .btn-ghost:hover{background:rgba(255,255,255,.14)}
+    .hero-controls{position:absolute;z-index:8;left:50%;bottom:38px;transform:translateX(-50%);width:min(1160px,calc(100% - 40px));display:flex;align-items:center;justify-content:space-between;color:#fff}
+    .dots{display:flex;gap:8px}
+    .dot{width:10px;height:10px;border-radius:99px;border:1px solid rgba(255,255,255,.7);background:transparent;transition:.25s;cursor:pointer}
+    .dot.active{width:34px;background:#fff}
+    .slide-arrows{display:flex;gap:10px}
+    .round{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.08);color:#fff;cursor:pointer;backdrop-filter:blur(8px);transition:.2s}
+    .round:hover{background:#fff;color:var(--deep)}
+    .hero-label{position:absolute;right:4vw;top:50%;z-index:4;transform:translateY(-50%) rotate(90deg);transform-origin:center;color:rgba(255,255,255,.45);font-size:11px;letter-spacing:.22em;text-transform:uppercase}
+
+    /* common */
+    section{padding:110px 0}
+    .section-kicker{color:var(--green);text-transform:uppercase;letter-spacing:.15em;font-size:12px;font-weight:900;margin-bottom:14px}
+    .section-title{font-size:clamp(34px,5vw,58px);line-height:1.04;letter-spacing:-.045em;margin:0 0 20px;color:var(--deep)}
+    .section-lead{font-size:19px;color:var(--muted);max-width:720px;margin:0}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease, transform .7s ease}
+    .reveal.visible{opacity:1;transform:none}
+
+    /* intro */
+    .intro{background:var(--cream)}
+    .intro-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:70px;align-items:center}
+    .pathway{margin-top:38px;display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--line);border-radius:20px;overflow:hidden;background:white}
+    .pathway div{padding:20px 12px;text-align:center;font-size:11px;font-weight:900;letter-spacing:.08em;border-right:1px solid var(--line);position:relative}
+    .pathway div:last-child{border:0}
+    .pathway div:not(:last-child):after{content:"→";position:absolute;right:-9px;top:50%;transform:translateY(-50%);z-index:2;background:white;width:18px;color:var(--green)}
+    .intro-card{background:linear-gradient(145deg,var(--navy),#0a294a);color:white;border-radius:32px;padding:42px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .intro-card:before{content:"";position:absolute;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(133,189,107,.23),transparent 65%);right:-80px;top:-80px}
+    .intro-card h3{font-size:34px;line-height:1.05;margin:0 0 16px;letter-spacing:-.035em}
+    .intro-card p{color:rgba(255,255,255,.72);margin-bottom:28px}
+    .mini-list{display:grid;gap:14px}
+    .mini-item{display:flex;align-items:center;gap:14px;padding:13px 0;border-top:1px solid rgba(255,255,255,.12)}
+    .mini-icon{width:36px;height:36px;border-radius:12px;background:rgba(255,255,255,.09);display:grid;place-items:center;color:var(--gold);font-size:17px}
+
+    /* ecosystem */
+    .ecosystem-head{display:flex;justify-content:space-between;gap:40px;align-items:end;margin-bottom:48px}
+    .eco-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .eco-card{border:1px solid var(--line);border-radius:22px;padding:28px;background:#fff;min-height:220px;transition:.3s;position:relative;overflow:hidden}
+    .eco-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:transparent}
+    .eco-number{font-size:11px;letter-spacing:.14em;color:var(--green);font-weight:900;margin-bottom:30px}
+    .eco-card h3{font-size:23px;margin:0 0 10px;color:var(--deep)}
+    .eco-card p{margin:0;color:var(--muted);font-size:15px}
+    .eco-card:after{content:"";position:absolute;width:70px;height:70px;border-radius:50%;right:-30px;bottom:-30px;background:rgba(47,141,89,.08)}
+
+    /* flagship */
+    .flagship{background:linear-gradient(135deg,var(--navy),#092845 70%,#0b4f39);color:white;position:relative;overflow:hidden}
+    .flagship .section-kicker{color:#a6ce8b}
+    .flagship .section-title{color:white}
+    .flagship .section-lead{color:rgba(255,255,255,.68)}
+    .flag-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:center}
+    .flag-visual{border-radius:30px;min-height:540px;background-image:linear-gradient(0deg,rgba(6,24,16,.38),rgba(6,24,16,.06)),url('assets/hero-grain-facility.png');background-size:cover;background-position:center;box-shadow:0 28px 70px rgba(0,0,0,.3);position:relative}
+    .flag-badge{position:absolute;left:24px;bottom:24px;background:rgba(255,255,255,.93);color:var(--deep);padding:16px 18px;border-radius:16px;font-weight:850;box-shadow:0 16px 40px rgba(0,0,0,.18)}
+    .flag-badge span{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--green);margin-bottom:4px}
+    .flag-points{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:34px}
+    .flag-point{padding:18px;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(255,255,255,.035)}
+    .flag-point strong{display:block;font-size:15px;margin-bottom:6px}
+    .flag-point span{font-size:13px;color:rgba(255,255,255,.58)}
+
+    /* pillars */
+    .pillars{background:#fff}
+    .pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:50px}
+    .pillar{border-radius:28px;padding:36px;min-height:340px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+    .pillar:nth-child(1){background:#edf5ed}
+    .pillar:nth-child(2){background:#f5efe5}
+    .pillar:nth-child(3){background:#eaf2ee}
+    .pillar-icon{width:52px;height:52px;border-radius:16px;background:white;display:grid;place-items:center;font-size:22px;box-shadow:0 10px 30px rgba(14,39,28,.08)}
+    .pillar h3{font-size:34px;letter-spacing:-.04em;margin:22px 0 8px;color:var(--deep)}
+    .pillar p{color:var(--muted);margin:0;max-width:290px}
+
+    /* technology */
+    .tech{background:var(--cream)}
+    .tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+    .tech-photo{border-radius:30px;position:relative;box-shadow:var(--shadow);overflow:hidden;background:#fff;border:1px solid rgba(13,53,95,.08)}
+    .tech-photo img{width:100%;height:auto;display:block;aspect-ratio:134/145;object-fit:cover}
+    .tech-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:28px}
+    .chip{padding:14px 16px;border-radius:14px;background:white;border:1px solid var(--line);font-weight:720;font-size:14px;color:var(--deep)}
+
+    /* partnership */
+    .partners{padding:95px 0;background:#fff}
+    .partner-box{border-radius:32px;background:linear-gradient(135deg,var(--navy),#081f38 62%,#0b5f40);color:#fff;padding:58px;display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:center;position:relative;overflow:hidden}
+    .partner-box:after{content:"";position:absolute;width:380px;height:380px;border-radius:50%;right:-130px;top:-130px;background:radial-gradient(circle,rgba(214,196,153,.19),transparent 70%)}
+    .partner-box h2{font-size:clamp(34px,5vw,56px);line-height:1.02;letter-spacing:-.045em;margin:0 0 18px}
+    .partner-box p{color:rgba(255,255,255,.7);margin:0}
+    .partner-types{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;position:relative;z-index:2}
+    .partner-type{border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.045);padding:16px;border-radius:15px;font-size:13px;font-weight:750;color:rgba(255,255,255,.84)}
+
+    /* contact */
+    .contact{background:#f8f8f4}
+    .contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;align-items:start}
+    .contact-meta{display:grid;gap:18px;margin-top:34px}
+    .meta-row{padding:18px 0;border-top:1px solid var(--line)}
+    .meta-row span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.11em;margin-bottom:4px}
+    .meta-row b{font-size:16px}
+    form{background:#fff;padding:32px;border-radius:26px;border:1px solid var(--line);box-shadow:0 18px 45px rgba(14,39,28,.07)}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    label{display:block;font-size:12px;font-weight:800;color:var(--deep);margin:0 0 7px}
+    input,textarea,select{width:100%;border:1px solid var(--line);background:#fcfcfa;border-radius:13px;padding:13px 14px;outline:none;transition:.2s;margin-bottom:16px}
+    input:focus,textarea:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(47,141,89,.1)}
+    textarea{min-height:120px;resize:vertical}
+    .submit{width:100%;border:0;background:var(--green);color:white;padding:15px;border-radius:14px;font-weight:850;cursor:pointer;transition:.2s}
+    .submit:hover{background:#195f3a;transform:translateY(-1px)}
+    .form-note{font-size:12px;color:var(--muted);margin:12px 0 0;text-align:center}
+    .success{display:none;margin-top:14px;padding:12px 14px;background:#edf7ef;color:#235e39;border-radius:12px;font-size:13px;font-weight:700}
+
+    /* footer */
+    footer{background:#071d34;color:white;padding:54px 0 28px}
+    .footer-top{display:flex;justify-content:space-between;gap:40px;align-items:start}
+    .footer-brand{max-width:360px}
+    .footer-brand p{color:rgba(255,255,255,.56);font-size:14px;margin:18px 0 0}
+    .footer-links{display:flex;gap:38px;flex-wrap:wrap;color:rgba(255,255,255,.72);font-size:13px;font-weight:650}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:42px;padding-top:22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:rgba(255,255,255,.42);font-size:11px}
+
+    @media (max-width:980px){
+      .nav-links{position:fixed;top:82px;left:20px;right:20px;display:none;flex-direction:column;align-items:stretch;padding:22px;background:rgba(14,39,28,.97);border-radius:18px;color:white!important;box-shadow:var(--shadow)}
+      .nav-links.open{display:flex}
+      .nav-links .nav-cta{text-align:center}
+      .menu-btn{display:flex}
+      .intro-grid,.flag-grid,.tech-grid,.contact-grid,.partner-box{grid-template-columns:1fr}
+      .eco-grid{grid-template-columns:repeat(2,1fr)}
+      .pillars-grid{grid-template-columns:1fr}
+      .flag-visual{min-height:420px;order:2}
+      .tech-photo{height:auto}
+      .partner-box{gap:36px}
+      .ecosystem-head{display:block}
+      .ecosystem-head .section-lead{margin-top:16px}
+    }
+    @media (max-width:680px){
+      .container{width:min(100% - 28px,1160px)}
+      section{padding:78px 0}
+      .hero{min-height:690px}
+      h1{font-size:48px}
+      .hero-label{display:none}
+      .hero-controls{bottom:24px}
+      .slide-arrows{display:none}
+      .pathway{grid-template-columns:1fr}
+      .pathway div{border-right:0;border-bottom:1px solid var(--line)}
+      .pathway div:last-child{border-bottom:0}
+      .pathway div:not(:last-child):after{content:"↓";right:auto;bottom:-11px;left:50%;top:auto;transform:translateX(-50%);width:24px}
+      .eco-grid,.flag-points,.tech-list,.partner-types,.form-row{grid-template-columns:1fr}
+      .intro-card,.partner-box{padding:30px 24px}
+      .footer-top{display:block}
+      .footer-links{margin-top:30px;gap:18px 26px}
+      .brand-logo{height:48px;max-width:200px}
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="header">
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="Agrofeed Global home">
+        <span class="brand-logo-wrap">
+          <img class="brand-logo" src="assets/agrofeed-global-logo-header.jpeg" alt="Agrofeed Global — Commercial Investment and Management" />
+        </span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#ecosystem">Ecosystem</a>
+        <a href="#tanzania">Tanzania</a>
+        <a href="#technology">Technology</a>
+        <a href="#partners">Partnerships</a>
+        <a href="#contact" class="nav-cta">Contact</a>
+      </nav>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="slides" aria-hidden="true">
+        <div class="slide active" style="background-image:url('assets/hero-farm-team.png');background-position:center center"></div>
+        <div class="slide" style="background-image:url('assets/hero-precision-farming.png');background-position:center center"></div>
+        <div class="slide" style="background-image:url('assets/hero-grain-facility.png');background-position:center center"></div>
+      </div>
+      <div class="container hero-content">
+        <div class="hero-copy reveal visible">
+          <div class="eyebrow">Agrofeed Global</div>
+          <h1>Building Africa’s next agricultural ecosystem.</h1>
+          <p>Connecting sustainable farming, technology, processing, people and markets — with a flagship agricultural development in Songea, Tanzania.</p>
+          <div class="hero-actions">
+            <a href="#about" class="btn btn-primary">Discover Agrofeed <span>→</span></a>
+            <a href="#tanzania" class="btn btn-ghost">Tanzania Flagship</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-label">Grow • Include • Export</div>
+      <div class="hero-controls">
+        <div class="dots" id="dots"><button class="dot active" aria-label="Slide 1"></button><button class="dot" aria-label="Slide 2"></button><button class="dot" aria-label="Slide 3"></button></div>
+        <div class="slide-arrows"><button class="round" id="prev" aria-label="Previous slide">←</button><button class="round" id="next" aria-label="Next slide">→</button></div>
+      </div>
+    </section>
+
+    <section class="intro" id="about">
+      <div class="container intro-grid">
+        <div class="reveal">
+          <div class="section-kicker">Who we are</div>
+          <h2 class="section-title">From a Tanzanian flagship to a scalable African model.</h2>
+          <p class="section-lead">Agrofeed Global is the international commercial, investment and management platform of the Agrofeed ecosystem, linking production with technology, value addition and market access.</p>
+          <div class="pathway" aria-label="Agrofeed value chain">
+            <div>FARM</div><div>TECHNOLOGY</div><div>PROCESSING</div><div>MARKET</div><div>EXPORT</div>
+          </div>
+        </div>
+        <div class="intro-card reveal">
+          <h3>One connected ecosystem.</h3>
+          <p>A focused platform built around practical agricultural value creation rather than disconnected projects.</p>
+          <div class="mini-list">
+            <div class="mini-item"><div class="mini-icon">↗</div><div><strong>Commercial Platform</strong><br><small>Partnerships, trade and market access</small></div></div>
+            <div class="mini-item"><div class="mini-icon">◌</div><div><strong>Operating Model</strong><br><small>Farm, technology, processing and people</small></div></div>
+            <div class="mini-item"><div class="mini-icon">◎</div><div><strong>African Growth</strong><br><small>A model designed for progressive replication</small></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ecosystem">
+      <div class="container">
+        <div class="ecosystem-head reveal">
+          <div><div class="section-kicker">The ecosystem</div><h2 class="section-title">Multiple engines of growth.</h2></div>
+          <p class="section-lead">A coordinated value chain designed to connect agricultural production with modern tools, stronger market participation and higher-value outcomes.</p>
+        </div>
+        <div class="eco-grid">
+          <article class="eco-card reveal"><div class="eco-number">01 / FARM</div><h3>Sustainable production</h3><p>Responsible, productive and technology-enabled agricultural systems.</p></article>
+          <article class="eco-card reveal"><div class="eco-number">02 / TECHNOLOGY</div><h3>Precision & data</h3><p>Digital farm management, monitoring and agricultural intelligence.</p></article>
+          <article class="eco-card reveal"><div class="eco-number">03 / PROCESS</div><h3>Value addition</h3><p>Progressing from raw commodities toward processing and branded products.</p></article>
+          <article class="eco-card reveal"><div class="eco-number">04 / INCLUDE</div><h3>Farmers & partners</h3><p>Connecting farmers, communities and entrepreneurs to modern value chains.</p></article>
+          <article class="eco-card reveal"><div class="eco-number">05 / INVEST</div><h3>Strategic partnerships</h3><p>Building relationships that support responsible agricultural growth.</p></article>
+          <article class="eco-card reveal"><div class="eco-number">06 / EXPORT</div><h3>Market access</h3><p>Connecting African-origin products with regional and international markets.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="flagship" id="tanzania">
+      <div class="container flag-grid">
+        <div class="flag-visual reveal">
+          <div class="flag-badge"><span>Flagship location</span>Songea • Ruvuma • Tanzania</div>
+        </div>
+        <div class="reveal">
+          <div class="section-kicker">Tanzania flagship</div>
+          <h2 class="section-title">The foundation of the Agrofeed agricultural ecosystem.</h2>
+          <p class="section-lead">The Songea development is positioned as a demonstration, production, technology and value-addition centre for the Agrofeed model.</p>
+          <div class="flag-points">
+            <div class="flag-point"><strong>Sustainable Agriculture</strong><span>Responsible production and resource use.</span></div>
+            <div class="flag-point"><strong>Maize & Soybean</strong><span>Core production focus within the flagship concept.</span></div>
+            <div class="flag-point"><strong>Precision Agriculture</strong><span>Digital tools, monitoring and modern farm practices.</span></div>
+            <div class="flag-point"><strong>Value Addition</strong><span>Storage, processing and market connection.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pillars">
+      <div class="container">
+        <div class="reveal"><div class="section-kicker">Three pillars</div><h2 class="section-title">Grow. Include. Export.</h2></div>
+        <div class="pillars-grid">
+          <article class="pillar reveal"><div class="pillar-icon">↗</div><div><h3>Grow</h3><p>Develop productive, responsible and technology-enabled agricultural systems.</p></div></article>
+          <article class="pillar reveal"><div class="pillar-icon">◎</div><div><h3>Include</h3><p>Connect farmers, communities, entrepreneurs and strategic partners to modern value chains.</p></div></article>
+          <article class="pillar reveal"><div class="pillar-icon">⇢</div><div><h3>Export</h3><p>Create more value from African production for African and international markets.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="tech" id="technology">
+      <div class="container tech-grid">
+        <div class="reveal">
+          <div class="section-kicker">Technology & sustainability</div>
+          <h2 class="section-title">Data. Precision. Intelligence.</h2>
+          <p class="section-lead">Technology is intended to progressively connect farm information, inputs, planting, weather, agronomic guidance, harvest, quality and traceability.</p>
+          <div class="tech-list">
+            <div class="chip">Precision agriculture</div>
+            <div class="chip">Digital farm management</div>
+            <div class="chip">Responsible water use</div>
+            <div class="chip">Traceability</div>
+            <div class="chip">Soil-health practices</div>
+            <div class="chip">Renewable-energy applications</div>
+          </div>
+        </div>
+        <div class="tech-photo reveal">
+          <img src="assets/technology-enabled-agriculture.png" alt="Agrofeed Global technology-enabled agriculture with precision farming drone" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <section class="partners" id="partners">
+      <div class="container">
+        <div class="partner-box reveal">
+          <div><div class="section-kicker" style="color:#b8d89f">Partnerships</div><h2>Growing through collaboration.</h2><p>Agrofeed is designed to work with organisations that can strengthen agricultural production, technology, knowledge, finance, processing and market access.</p></div>
+          <div class="partner-types">
+            <div class="partner-type">Public institutions</div>
+            <div class="partner-type">Financial institutions</div>
+            <div class="partner-type">Agricultural technology</div>
+            <div class="partner-type">Research institutions</div>
+            <div class="partner-type">Farmer organisations</div>
+            <div class="partner-type">Processing & logistics</div>
+            <div class="partner-type">International buyers</div>
+            <div class="partner-type">Development partners</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container contact-grid">
+        <div class="reveal">
+          <div class="section-kicker">Join the ecosystem</div>
+          <h2 class="section-title">Start a conversation with Agrofeed Global.</h2>
+          <p class="section-lead">For investment, farming, technology, commercial and market partnerships.</p>
+          <div class="contact-meta">
+            <div class="meta-row"><span>International platform</span><b>Dubai, United Arab Emirates</b></div>
+            <!-- <div class="meta-row"><span>Agricultural flagship</span><b>Songea, Ruvuma, Tanzania</b></div> -->
+          </div>
+        </div>
+        <form class="reveal" id="contactForm">
+          <div class="form-row">
+            <div><label for="name">Name</label><input id="name" name="name" required placeholder="Your name" /></div>
+            <div><label for="email">Email</label><input id="email" name="email" type="email" required placeholder="name@company.com" /></div>
+          </div>
+          <label for="interest">Area of interest</label>
+          <select id="interest" name="interest"><option>Strategic partnership</option><option>Investment</option><option>Farmer / outgrower participation</option><option>Technology partnership</option><option>Commercial / buyer enquiry</option><option>Other</option></select>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell us briefly how you would like to engage with Agrofeed Global."></textarea>
+          <button class="submit" type="submit">Send enquiry</button>
+          <div class="success" id="success">Thank you. Your enquiry has been prepared for submission.</div>
+          <p class="form-note">Prototype form — connect this to your CRM or email service before launch.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand"><div class="footer-logo-wrap"><img class="footer-logo" src="assets/agrofeed-global-logo.jpeg" alt="Agrofeed Global — Commercial Investment and Management" /></div><p>Growing Africa naturally through a connected agricultural ecosystem.</p></div>
+        <div class="footer-links"><a href="#about">About</a><a href="#ecosystem">Ecosystem</a><a href="#tanzania">Tanzania</a><a href="#technology">Technology</a><a href="#partners">Partnerships</a><a href="#contact">Contact</a></div>
+      </div>
+      <div class="footer-bottom"><div>© 2026 Agrofeed Global. All rights reserved.</div><div>Representative imagery updated for a more modern professional presentation; replace with final approved project photography before publication.</div></div>
+    </div>
+  </footer>
+
+  <script>
+    const header=document.getElementById('header');
+    window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>30));
+
+    const menuBtn=document.getElementById('menuBtn'), navLinks=document.getElementById('navLinks');
+    menuBtn.addEventListener('click',()=>navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
+
+    const slides=[...document.querySelectorAll('.slide')],dots=[...document.querySelectorAll('.dot')];
+    let current=0,timer;
+    function showSlide(i){current=(i+slides.length)%slides.length;slides.forEach((s,n)=>s.classList.toggle('active',n===current));dots.forEach((d,n)=>d.classList.toggle('active',n===current));}
+    function auto(){clearInterval(timer);timer=setInterval(()=>showSlide(current+1),6000)}
+    document.getElementById('next').onclick=()=>{showSlide(current+1);auto()};
+    document.getElementById('prev').onclick=()=>{showSlide(current-1);auto()};
+    dots.forEach((d,i)=>d.onclick=()=>{showSlide(i);auto()}); auto();
+
+    const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.14});
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el=>observer.observe(el));
+
+    const sections=[...document.querySelectorAll('main section[id]')],links=[...document.querySelectorAll('.nav-links a[href^="#"]')];
+    const activeObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id))}}),{rootMargin:'-35% 0px -55% 0px'});
+    sections.forEach(s=>activeObserver.observe(s));
+
+    document.getElementById('contactForm').addEventListener('submit',e=>{e.preventDefault();document.getElementById('success').style.display='block';e.target.querySelector('.submit').textContent='Enquiry ready';});
+  </script>
+</body>
+</html>
